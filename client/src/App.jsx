@@ -4,14 +4,14 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 const projects = [
   {
-    title: 'Proyecto Web',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80',
-    link: 'https://github.com/usuario/proyecto-web'
+    title: 'Backend Flota de Camiones',
+    image: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=900&q=80',
+    link: 'https://github.com/Gabriel6144/Trabajo-Practico-Integrador-Backend'
   },
   {
-    title: 'Aplicacion React',
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=900&q=80',
-    link: 'https://github.com/usuario/app-react'
+    title: 'Bot agendar parciales',
+    image: 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=900&q=80',
+    link: 'https://github.com/Tincho-git/agente01.github.io'
   },
   {
     title: 'Dashboard',
@@ -32,7 +32,11 @@ const skills = [
   ['Base de datos', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg'],
   ['Postman', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg'],
   ['UML', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unifiedmodelinglanguage/unifiedmodelinglanguage-original.svg'],
-  ['Scrum', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-plain.svg']
+  ['Scrum', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-plain.svg'],
+  ['Linux', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg'],
+  ['Node.js', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg'],
+  ['Docker', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg'],
+  ['Spring', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg']
 ];
 
 function LinkedInIcon() {
@@ -105,11 +109,11 @@ function App() {
             equipo y convertir ideas en proyectos reales.
           </p>
           <div className="social-actions">
-            <a className="button linkedin" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">
+            <a className="button linkedin" href="https://www.linkedin.com/in/martín-boiero-36383a322/" target="_blank" rel="noreferrer">
               <LinkedInIcon />
               Mi LinkedIn
             </a>
-            <a className="button github" href="https://github.com/" target="_blank" rel="noreferrer">
+            <a className="button github" href="https://github.com/Tincho-git" target="_blank" rel="noreferrer">
               <GitHubIcon />
               Mi GitHub
             </a>
