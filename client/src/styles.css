@@ -190,6 +190,9 @@ a {
 }
 
 .hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   display: grid;
   min-height: calc(100vh - 76px);
   padding: clamp(3.5rem, 8vw, 7rem) clamp(1.25rem, 5vw, 5rem);
@@ -199,7 +202,42 @@ a {
     linear-gradient(135deg, var(--background), color-mix(in srgb, var(--primary) 22%, var(--background)));
 }
 
+.hero::before,
+.hero::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  content: "";
+}
+
+.hero::before {
+  opacity: 0.28;
+  background:
+    linear-gradient(90deg, transparent 0 48%, color-mix(in srgb, var(--secondary) 44%, transparent) 49% 51%, transparent 52%),
+    linear-gradient(0deg, transparent 0 48%, color-mix(in srgb, var(--primary) 36%, transparent) 49% 51%, transparent 52%);
+  background-size: 120px 120px;
+  mask-image: radial-gradient(circle at 78% 42%, #000 0 42%, transparent 72%);
+  animation: networkDrift 18s linear infinite;
+}
+
+.hero::after {
+  opacity: 0.44;
+  background:
+    radial-gradient(circle at 18% 28%, var(--secondary) 0 3px, transparent 4px),
+    radial-gradient(circle at 74% 22%, var(--primary) 0 3px, transparent 4px),
+    radial-gradient(circle at 86% 64%, var(--secondary) 0 4px, transparent 5px),
+    radial-gradient(circle at 48% 78%, var(--primary) 0 3px, transparent 4px),
+    linear-gradient(115deg, transparent 18%, color-mix(in srgb, var(--secondary) 35%, transparent) 18.4% 18.8%, transparent 19.2%),
+    linear-gradient(35deg, transparent 31%, color-mix(in srgb, var(--primary) 30%, transparent) 31.4% 31.8%, transparent 32.2%);
+  background-size: 360px 260px, 420px 300px, 500px 340px, 460px 320px, 520px 360px, 460px 320px;
+  filter: drop-shadow(0 0 14px color-mix(in srgb, var(--secondary) 46%, transparent));
+  animation: circuitPulse 7s ease-in-out infinite alternate;
+}
+
 .hero-content {
+  position: relative;
+  z-index: 1;
   max-width: 780px;
 }
 
@@ -283,6 +321,8 @@ a {
   position: relative;
   max-width: 1500px;
   margin: 0 auto;
+  padding: 1.7rem 0 2.3rem;
+  overflow: visible;
 }
 
 .project-slider {
@@ -290,9 +330,8 @@ a {
   gap: 1.2rem;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0.75rem 0 1.2rem;
+  padding: 2.5rem 1rem 3rem;
   overflow-x: auto;
-  overflow-y: visible;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
@@ -348,11 +387,12 @@ a {
   background: var(--surface);
   box-shadow: 0 16px 34px var(--shadow);
   transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
-  transform-origin: top center;
+  transform-origin: center;
+  will-change: transform;
 }
 
 .project-card:hover {
-  transform: scale(1.12);
+  transform: translateY(-8px) scale(1.08);
   box-shadow: 0 28px 62px rgba(0, 0, 0, 0.32);
   border-color: rgba(20, 153, 115, 0.55);
   z-index: 1;
@@ -490,10 +530,6 @@ a {
     justify-content: flex-end;
   }
 
-  .project-grid {
-    grid-template-columns: 1fr;
-  }
-
   .skills-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -519,5 +555,37 @@ a {
 
   .button {
     width: 100%;
+  }
+}
+
+@keyframes networkDrift {
+  from {
+    background-position: 0 0, 0 0;
+  }
+
+  to {
+    background-position: 120px 120px, -120px 120px;
+  }
+}
+
+@keyframes circuitPulse {
+  from {
+    transform: translate3d(-1.5rem, -0.5rem, 0) scale(1);
+    opacity: 0.3;
+  }
+
+  to {
+    transform: translate3d(1rem, 0.75rem, 0) scale(1.04);
+    opacity: 0.58;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero::before,
+  .hero::after,
+  .project-card,
+  .brand img {
+    animation: none;
+    transition: none;
   }
 }
