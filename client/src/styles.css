@@ -69,8 +69,8 @@ a {
 .brand {
   display: inline-flex;
   flex: 0 0 auto;
-  width: 48px;
-  height: 48px;
+  width: 70px;
+  height: 70px;
   padding: 3px;
   border: 2px solid var(--primary);
   border-radius: 50%;
@@ -84,6 +84,11 @@ a {
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
+  transition: transform 250ms ease, box-shadow 250ms ease;
+}
+
+.brand:hover img {
+  transform: scale(1.50);
 }
 
 .nav-actions,
@@ -148,11 +153,18 @@ a {
 }
 
 .sun-icon {
-  justify-self: start;
+  position: relative;
+  left: 0px;
+  top: 1px;
+  transform: scale(1.15);
+
 }
 
 .moon-icon {
-  justify-self: end;
+  position: relative;
+  left: 7px;
+  top: 1px;
+  transform: scale(1.15);
 }
 
 .toggle-thumb {
@@ -169,12 +181,12 @@ a {
 
 .app.dark .moon-icon,
 .app.light .sun-icon {
-  color: #ffffff;
-  transform: scale(1.05);
+  color: var(--primary);
+  transform: scale(1.08);
 }
 
 .app.light .toggle-thumb {
-  transform: translateX(34px);
+  transform: translateX(33px);
 }
 
 .hero {
@@ -267,20 +279,83 @@ a {
   font-size: clamp(2rem, 4vw, 3rem);
 }
 
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.2rem;
-  max-width: 1100px;
+.project-slider-container {
+  position: relative;
+  max-width: 1500px;
   margin: 0 auto;
 }
 
+.project-slider {
+  display: flex;
+  gap: 1.2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.75rem 0 1.2rem;
+  overflow-x: auto;
+  overflow-y: visible;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.project-slider::-webkit-scrollbar {
+  display: none;
+}
+
 .project-card {
+  flex: 0 0 min(340px, 85vw);
+  scroll-snap-align: start;
+}
+
+.project-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: transform 200ms ease, background 200ms ease, box-shadow 200ms ease;
+}
+
+.project-nav:hover {
+  transform: translateY(-50%) scale(1.05);
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.project-nav--prev {
+  left: 0.3rem;
+}
+
+.project-nav--next {
+  right: 0.3rem;
+}
+
+.project-card {
+  flex: 0 0 min(320px, 100%);
+  scroll-snap-align: start;
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 16px;
   background: var(--surface);
   box-shadow: 0 16px 34px var(--shadow);
+  transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
+  transform-origin: top center;
+}
+
+.project-card:hover {
+  transform: scale(1.12);
+  box-shadow: 0 28px 62px rgba(0, 0, 0, 0.32);
+  border-color: rgba(20, 153, 115, 0.55);
+  z-index: 1;
 }
 
 .project-card img {

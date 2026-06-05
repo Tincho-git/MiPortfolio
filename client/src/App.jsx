@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { FiMoon, FiSun } from 'react-icons/fi';
+import perfilImage from './img/perfil.jpeg';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
@@ -61,6 +62,17 @@ function App() {
   const [status, setStatus] = useState('');
   const [isSending, setIsSending] = useState(false);
   const [theme, setTheme] = useState('dark');
+  const projectSliderRef = useRef(null);
+
+  const scrollProjects = (direction) => {
+    if (projectSliderRef.current) {
+      const offset = projectSliderRef.current.clientWidth * 0.8;
+      projectSliderRef.current.scrollBy({
+        left: direction === 'next' ? offset : -offset,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   const handleChange = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });
@@ -97,7 +109,7 @@ function App() {
       <nav className="topbar">
         <a className="brand" href="#sobre-mi" aria-label="Ir al inicio">
           <img
-            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=160&q=80"
+            src={perfilImage}
             alt="Foto de perfil"
           />
         </a>
@@ -152,16 +164,24 @@ function App() {
           <p className="eyebrow">Trabajos</p>
           <h2>Proyectos</h2>
         </div>
-        <div className="project-grid">
-          {projects.map((project) => (
-            <article className="project-card" key={project.title}>
-              <img src={project.image} alt={`Imagen representativa de ${project.title}`} />
-              <div>
-                <h3>{project.title}</h3>
-                <a href={project.link} target="_blank" rel="noreferrer">Ver repositorio</a>
-              </div>
-            </article>
-          ))}
+        <div className="project-slider-container">
+          <button className="project-nav project-nav--prev" type="button" onClick={() => scrollProjects('prev')} aria-label="Ver proyectos anteriores">
+            <span aria-hidden="true">‹</span>
+          </button>
+          <div className="project-slider" ref={projectSliderRef}>
+            {projects.map((project) => (
+              <article className="project-card" key={project.title}>
+                <img src={project.image} alt={`Imagen representativa de ${project.title}`} />
+                <div>
+                  <h3>{project.title}</h3>
+                  <a href={project.link} target="_blank" rel="noreferrer">Ver repositorio</a>
+                </div>
+              </article>
+            ))}
+          </div>
+          <button className="project-nav project-nav--next" type="button" onClick={() => scrollProjects('next')} aria-label="Ver próximos proyectos">
+            <span aria-hidden="true">›</span>
+          </button>
         </div>
       </section>
 
