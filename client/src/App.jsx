@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FiMoon, FiSun } from 'react-icons/fi';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
@@ -107,8 +108,13 @@ function App() {
             onClick={() => setTheme((currentTheme) => (currentTheme === 'dark' ? 'light' : 'dark'))}
             aria-label={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
           >
-            <span className="sun" aria-hidden="true" />
-            <span className="cloud" aria-hidden="true" />
+            <span className="toggle-icon sun-icon" aria-hidden="true">
+              <FiSun />
+            </span>
+            <span className="toggle-icon moon-icon" aria-hidden="true">
+              <FiMoon />
+            </span>
+            <span className="toggle-thumb" aria-hidden="true" />
           </button>
           <div className="nav-links">
             <a href="#sobre-mi">Sobre mi</a>
